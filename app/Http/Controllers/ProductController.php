@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ProductRepository;
+use App\Http\Http;
 
 class ProductController extends Controller
 {
@@ -22,6 +23,6 @@ class ProductController extends Controller
   public function index()
   {
     $products = $this->productRepository->findAll();
-    return response()->json(products);
+    return response()->json(products, Http::OK);
   }
 }
