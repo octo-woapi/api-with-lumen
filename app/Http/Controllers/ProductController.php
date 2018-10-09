@@ -23,6 +23,24 @@ class ProductController extends Controller
   public function index()
   {
     $products = $this->productRepository->findAll();
-    return response()->json(products, Http::OK);
+    return response()->json($products, Http::OK);
+  }
+
+  public function show(string $id)
+  {
+    $product = $this->productRepository->getById($id);
+    if ($product === null)
+      throw new NotFoundException();
+    return $this->response()->json($product, Http::OK);
+  }
+
+  public function replace(/* params */)
+  {
+
+  }
+
+  public function remove(string $id)
+  {
+    
   }
 }
