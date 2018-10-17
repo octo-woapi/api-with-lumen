@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Repositories\ProductRepository;
 use App\Http\Http;
 
@@ -30,8 +32,20 @@ class ProductController extends Controller
   {
     $product = $this->productRepository->getById($id);
     if ($product === null)
-      throw new NotFoundException();
-    return $this->response()->json($product, Http::OK);
+      return response()->json(null, Http::NotFound);
+    return response()->json($product, Http::OK);
+  }
+
+  public function create(Request $request)
+  {
+    // Retrieve all parameters
+    $input = $request->all();
+    $product = $this->productRepository->create($input);
+    $url = $request->url();
+    $headers = [
+      'Location' => "$url/$product->id"
+    ];
+    return response()->json(null, Http::Created, $headers);
   }
 
   public function replace(/* params */)

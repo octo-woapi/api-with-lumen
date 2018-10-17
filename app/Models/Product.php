@@ -42,7 +42,7 @@ class Product
    */
   public $weight;
 
-  public function __construct(string $name, int $price, float $weight)
+  public function __construct(string $name, float $price, float $weight)
   {
     $this->name = $name;
     $this->price = $price;

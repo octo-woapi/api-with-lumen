@@ -31,4 +31,25 @@ class ProductRepositoryTest extends TestCase
     // Then the returned product should be null
     $this->assertNull($product);
   }
+
+  function testCreateProduct()
+  {
+    // Given a repository
+    $repository = new ProductRepository();
+    // Number of products before insertion
+    $before = count($repository->products);
+    $input = [
+      'name' => 'Honor 8x',
+      'price' => 269.00,
+      'weight' => 0.300
+    ];
+    // When calling create with an associative array input
+    $product = $repository->create($input);
+    // Then return a product
+    $this->assertNotNull($product);
+    $this->assertNotNull($product->id);
+    // Number of products after insertion
+    $after = count($repository->products);
+    $this->assertEquals($before + 1, $after);
+  }
 }

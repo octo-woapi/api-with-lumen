@@ -11,7 +11,7 @@ class Order {
   /**
    * The order status, either "pending", "paid" or "canceled".
    */
-  public $status;
+  public $status = 'pending';
 
   /**
    * The list of products belonging to this order.
@@ -19,12 +19,12 @@ class Order {
   public $products;
 
   /**
-   * How much the shipment costs.
+   * How much the shipment costs (in euros).
    */
-  public $shipmentAmount;
+  public $shipmentAmount = 25;
 
   /**
-   * How much the whole order costs.
+   * How much the whole order costs (in euros).
    */
   public $totalAmount;
 
@@ -32,4 +32,9 @@ class Order {
    * The cumulated weight of the products.
    */
   public $totalWeight;
+
+  public function __construct(array $products)
+  {
+    $this->products = $products;
+  }
 }

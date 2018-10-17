@@ -16,7 +16,7 @@ class ProductRepository implements Repository
     ];
   }
 
-  function findAll()
+  function findAll(): array
   {
     return $this->products;
   }
@@ -26,5 +26,12 @@ class ProductRepository implements Repository
     return array_first($this->products, function($product) use ($id) {
       return $product->id === $id;
     });
+  }
+
+  function create($input)
+  {
+    $product = Product::productWithId($input['name'], $input['price'], $input['weight']);
+    $this->products[] = $product;
+    return $product;
   }
 }
